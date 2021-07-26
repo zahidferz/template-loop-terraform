@@ -1,0 +1,23 @@
+${jsonencode({
+    "widgets": [
+        {
+            "height": 6,
+            "width": 24,
+            "y": 0,
+            "x": 0,
+            "type": "metric",
+            "properties": {
+                "metrics": [
+                    [ "AWS/RDS", "DBLoad", "DBInstanceIdentifier", "${dbinstancemain}" ],
+                    [for db_key,db_value in dbinstanceidentifier : "${db_value}"],
+                ],
+                "view": "timeSeries",
+                "stacked": false,
+                "region": "${region}",
+                "stat": "Maximum",
+                "period": 300,
+                "title": "DBLoad (# of waiting connections)"
+            }
+        }
+    ]
+})}
